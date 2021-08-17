@@ -1,0 +1,30 @@
+* {
+    box-sizing: border-box;
+    padding: 0%;
+    margin: 0%;
+}
+#container {
+    border: 5px solid;
+    width: 950px;
+    height: 500px;
+    margin-left: 40%;
+    margin-top: 5%;
+}
+#header {
+    text-align: center;
+    padding-top: 80px;
+    font-family: 'Courier New', Courier, monospace;
+}
+}
+#StartQuiz {
+    border: 3px solid;
+    background-color: aqua;
+    font-size: large;
+    font-weight: bold;
+}
+.Questionone {
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: bold;
+    /*display: none;*/
+    padding: 50px 50px;
+}
