@@ -14,15 +14,44 @@
     text-align: center;
     padding-top: 80px;
     font-family: 'Courier New', Courier, monospace;
+    font-size: large;
 }
-#StartQuiz {
+#header h1 {
+    font-weight: bolder;
+    font-size: x-large;
+    padding-bottom: 20px;
+}
+#header p {
+    text-align: justify;
+    padding: 10px;
+    line-height: 1.8;
+    margin: 50px 50px;
+    font-weight: bold;
+} 
+#startQuiz {
     border: 3px solid;
     background-color: aqua;
     font-size: large;
     font-weight: bold;
+    
 }
 .Questionone {
     font-family: 'Courier New', Courier, monospace;
     font-weight: bold;
     padding: 50px 50px;
+}
+#next {
+    padding: 10px;
+    border: 3px solid;
+    background-color: aqua;
+    font-size: large;
+    font-weight: bold;
+    float: right;
+    margin-right: 10px;
+}
+#timer {
+    font-size: large;
+    font-weight: bold;
+    float: left;
+    margin-left: 5px;
 }

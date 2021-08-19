@@ -7,7 +7,11 @@
 <body>
 <section id="container">
     <div id="header"> 
-        <button id="StartQuiz">Start Quiz</button>
+        <!--<h1>Coding Quiz Challenge</h1>
+        <p>try to answer the following code-related questions within the time limit.
+            keep in mind that incorrect answer will penalize your scoretime by ten seconds.
+        </p>-->
+        <button id="startQuiz">Start Quiz</button>
     </div>  
     <div id="quiz" style="display: none;">
         <button id="next">Next</button>
@@ -18,6 +22,7 @@
             <div class="choice" id="C" onclick="checkanswer('C')"></div>
             <div class="choice" id="D" onclick="checkanswer('D')"></div>
         </div>
+        <div id="timer">Timer<span></span></div>
     </div>
 </section>
 <script src="./script.js"></script>
