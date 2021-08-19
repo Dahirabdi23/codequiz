@@ -2,17 +2,23 @@
 <head>
     <meta charset="Utf-8"/>
     <link rel="stylesheet" href="style.css">
-    <link rel="script" href="script.js">
     <title>CODE Quiz</title>
 </head>
 <body>
 <section id="container">
     <div id="header"> 
-    <button id="StartQuiz">Start Quiz</button>
+        <button id="StartQuiz">Start Quiz</button>
     </div>  
-    <div class="Questionone"></div>
-    <div class="Questiontwo"></div>
-    <div class="Questionthree"></div>
-    <div class="Questionfour"></div>
+    <div id="quiz" style="display: none;">
+        <button id="next">Next</button>
+        <div class="Question"></div>
+        <div id="options">
+            <div class="choice" id="A" onclick="checkanswer('A')"></div>
+            <div class="choice" id="B" onclick="checkanswer('B')"></div>
+            <div class="choice" id="C" onclick="checkanswer('C')"></div>
+            <div class="choice" id="D" onclick="checkanswer('D')"></div>
+        </div>
+    </div>
 </section>
+<script src="./script.js"></script>
 </body>

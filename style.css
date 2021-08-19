@@ -15,7 +15,6 @@
     padding-top: 80px;
     font-family: 'Courier New', Courier, monospace;
 }
-}
 #StartQuiz {
     border: 3px solid;
     background-color: aqua;
@@ -25,6 +24,5 @@
 .Questionone {
     font-family: 'Courier New', Courier, monospace;
     font-weight: bold;
-    /*display: none;*/
     padding: 50px 50px;
 }
