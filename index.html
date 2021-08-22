@@ -14,15 +14,17 @@
         <button id="startQuiz">Start Quiz</button>
     </div>  
     <div id="quiz" style="display: none;">
-        <button id="next">Next</button>
-        <div class="Question"></div>
-        <div id="options">
+        <!--<button id="next">Next</button>-->
+        <div class="question"></div>
+        <div id="choice">
             <div class="choice" id="A" onclick="checkanswer('A')"></div>
             <div class="choice" id="B" onclick="checkanswer('B')"></div>
             <div class="choice" id="C" onclick="checkanswer('C')"></div>
             <div class="choice" id="D" onclick="checkanswer('D')"></div>
         </div>
         <div id="timer">Timer<span></span></div>
+        <div id="counter"></div>
+        <div id="scorecontainer" style="display: none"></div>
     </div>
 </section>
 <script src="./script.js"></script>

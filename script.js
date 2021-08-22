@@ -1,39 +1,91 @@
 var container = document.getElementById("container");
+var header = document.querySelector("header");
 var start = document.getElementById("startQuiz");
 var quiz = document.getElementById("quiz");
-var questionsEl = document.getElementsByClassName("Question");
+var question = document.querySelector(".question");
 var choiceA = document.getElementById("A");
 var choiceB = document.getElementById("B");
 var choiceC = document.getElementById("C");
 var choiceD = document.getElementById("D");
+var score = document.getElementById("scorecontainer");
 var timecontainer = document.querySelector("#timer span");
-var header = document.querySelector("header");
-var questions = [{
-    questionsEl: "Commonly used data types Do Not Include",
+var allquestions = [{
+    question: "Commonly used data types Do Not Include",
     choiceA:"strings",
     choiceB:"alerts",
     choiceC:"Numbers",
     choiceD:"booleans",
+    correct:"B"
 },
 {
-    questionsEl:"the condition in an if/else statement is enclosed within",
+    question:"the condition in an if/else statement is enclosed within",
     choiceA:"quotes",
     choiceB:"curly brackets",
     choiceC:"square brackets",
     choiceD:"parenthesis",
+    correct:"B"
 },
 {
-    questionsEl:"arrays in javeScript can be used to store",
+    question:"arrays in javeScript can be used to store",
     choiceA:"numbers and strings",
-    choiceB:"ether arrays",
+    choiceB:"other arrays",
     choiceC:"booleans",
     choiceD:"all of the above",
+    correct:"C"
 }]
+var lastQuestion = allquestions.length - 1;
+var runningquestion = 0;
+var score = 0;
+
+function renderQuestion(){
+    
+    var q = allquestions[runningquestion];
+
+    question.innerHTML = "<p>"+ q.question +"</p>";
+
+    choiceA.innerHTML = q.choiceA;
+
+    choiceB.innerHTML = q.choiceB;
+
+    choiceC.innerHTML = q.choiceC;
+
+    choiceD.innerHTML = q.choiceD;
+}
+//for(var qIndex = 0; qIndex <= lastQuestion; qIndex++);
+function checkAnswer(answer){
+    if( answer == allquestions[runningquestion].correct){
+        // answer is correct
+        score++;
+        answerIsCorrect();
+    }else{
+        // answer is wrong
+        timer=timer-10
+        answerIsWrong();
+    }
+    if(runningquestion < lastQuestion){
+        runningquestion++;
+        renderQuestion();
+    }else{
+        // end the quiz and show the score
+        clearInterval(timer);
+        scorerender();
+    }
+}
+
+function answerIsCorrect(){
+    document.getElementById(runningquestion);
+}
+function answerIsWrong(){
+    document.getElementById(runningquestion);
+}
+
 var time = 60
 function startQuiz() {
+    document.getElementById("header").style.visibility="hidden";
+    renderQuestion();
     quiz.style.display = "block";
 var timer = setInterval(countdown, 1000);
-function countdown(params) {
+function countdown() {
     if(time > 0) {
         time-=1
         timecontainer.textContent = time;
@@ -41,8 +93,7 @@ function countdown(params) {
     } else {
         clearInterval(timer);
     }
-
-}
 }
 
+}
 start.addEventListener("click", startQuiz);

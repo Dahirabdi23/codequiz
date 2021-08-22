@@ -35,10 +35,23 @@
     font-weight: bold;
     
 }
-.Questionone {
+.question {
     font-family: 'Courier New', Courier, monospace;
     font-weight: bold;
-    padding: 50px 50px;
+    padding: 5px 5px;
+    text-align: center;
+    margin-bottom: 5%;
+}
+.choice {
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: bold;
+    text-align: center;
+    padding: 15px 15px;
+    cursor: pointer;
+}
+.choice:hover{
+    border : 2px solid grey;
+    font-weight: bold;
 }
 #next {
     padding: 10px;
