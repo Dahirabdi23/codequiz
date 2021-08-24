@@ -8,6 +8,7 @@ var choiceB = document.getElementById("B");
 var choiceC = document.getElementById("C");
 var choiceD = document.getElementById("D");
 var score = document.getElementById("scorecontainer");
+var choice = document.querySelector(".choice");
 var timecontainer = document.querySelector("#timer span");
 var allquestions = [{
     question: "Commonly used data types Do Not Include",
@@ -50,16 +51,18 @@ function renderQuestion(){
     choiceC.innerHTML = q.choiceC;
 
     choiceD.innerHTML = q.choiceD;
+
 }
-//for(var qIndex = 0; qIndex <= lastQuestion; qIndex++);
+var choices = {choiceA, choiceB, choiceC, choiceD};
+
 function checkAnswer(answer){
-    if( answer == allquestions[runningquestion].correct){
+    if(allquestions[runningquestion].answer === allquestions[runningquestion].choices[answer]) {
         // answer is correct
         score++;
         answerIsCorrect();
     }else{
         // answer is wrong
-        timer=timer-10
+        timer -= 10;
         answerIsWrong();
     }
     if(runningquestion < lastQuestion){
@@ -68,7 +71,7 @@ function checkAnswer(answer){
     }else{
         // end the quiz and show the score
         clearInterval(timer);
-        scorerender();
+        //scorerender();
     }
 }
 
@@ -83,6 +86,7 @@ var time = 60
 function startQuiz() {
     document.getElementById("header").style.visibility="hidden";
     renderQuestion();
+    checkAnswer();
     quiz.style.display = "block";
 var timer = setInterval(countdown, 1000);
 function countdown() {
