@@ -1,103 +1,141 @@
-var container = document.getElementById("container");
-var header = document.querySelector("header");
-var start = document.getElementById("startQuiz");
-var quiz = document.getElementById("quiz");
-var question = document.querySelector(".question");
-var choiceA = document.getElementById("A");
-var choiceB = document.getElementById("B");
-var choiceC = document.getElementById("C");
-var choiceD = document.getElementById("D");
-var score = document.getElementById("scorecontainer");
-var choice = document.querySelector(".choice");
-var timecontainer = document.querySelector("#timer span");
-var allquestions = [{
-    question: "Commonly used data types Do Not Include",
-    choiceA:"strings",
-    choiceB:"alerts",
-    choiceC:"Numbers",
-    choiceD:"booleans",
-    correct:"B"
-},
-{
-    question:"the condition in an if/else statement is enclosed within",
-    choiceA:"quotes",
-    choiceB:"curly brackets",
-    choiceC:"square brackets",
-    choiceD:"parenthesis",
-    correct:"B"
-},
-{
-    question:"arrays in javeScript can be used to store",
-    choiceA:"numbers and strings",
-    choiceB:"other arrays",
-    choiceC:"booleans",
-    choiceD:"all of the above",
-    correct:"C"
-}]
-var lastQuestion = allquestions.length - 1;
-var runningquestion = 0;
-var score = 0;
+var questions = [
+    {
+    title: " sting values be enclosed with? ",
+    options: ["commas","curly brackets","quotes","parentheses"],
+    answer : "quotes"    
+    },
+    {
+    title: "What can arrays in JavaScript be used to store?",
+    options: ["numbers and strings","others Arrays","booleances", "all of the above"],
+    answer : "all of the above"    
+    },
+    {
+    title: "What is a very useful tool used during development and debugging for printing content to the debugger?",
+    options: ["JavaScript","terminal/bash","alerts", "console.log"],
+    answer : "console.log"    
+    },
+    {
+    title: "Which is NOT a commonly used data type?",
+    options: ["alerts","numbers","booleans","strings", ],
+    answer : "alerts"    
+    },
+    {
+    title: "Which encloses the condition in an if/else statement?",
+    options: ["square brackets","parentheses","curly brackets","quotes", ],
+    answer : "parentheses"    
+    },
+];
 
-function renderQuestion(){
-    
-    var q = allquestions[runningquestion];
+// Variables declared
+var current = 0;
+var count = 75;
+var allScores = [];
+var userScores = JSON.parse(localStorage.getItem("userScores"));
+var quizQuestions = document.getElementById("quiz-questions");
+var timer = document.getElementById("timer");
+var btnStart = document.getElementById("btn-start");
+var timecounter = document.getElementById("timecounter");
+var titleitem = document.getElementById("title-item");
+var nextQuestions = document.getElementById("next-questions");
+var userAnswers = document.getElementById("question-answers");
+var myScore = document.getElementById("score");
+var btnScore = document.getElementById("btnScore");
+var info = document.getElementById("info");
+var addscore = document.getElementById("addscore");
 
-    question.innerHTML = "<p>"+ q.question +"</p>";
 
-    choiceA.innerHTML = q.choiceA;
+// Quiz start
+btnStart.addEventListener("click", beginQuiz);
+    function beginQuiz(){
+        if(userScores !==null) { 
+            allScores = userScores;}
+            info.classList.add("d-none");
+            btnStart.classList.add("d-none");
+            timecounter.classList.remove("d-none");
+            quizQuestions.classList.remove("d-none");
+            nextQuestions= questions[current];
+            console.log(nextQuestions.title);
+            currentQuestion(nextQuestions);
+            setTime();}
+            btnScore.addEventListener("click" , function(){
+            let name = document.getElementById("inputScore").value;
+            scoreBoard(name, count);
+});
 
-    choiceB.innerHTML = q.choiceB;
-
-    choiceC.innerHTML = q.choiceC;
-
-    choiceD.innerHTML = q.choiceD;
-
+// Questions
+function currentQuestion(question){
+    titleitem.innerText=question.title;
+    question.options.forEach(element => {
+    var button =document.createElement("button");
+    button.className="btn-primary btn-block";
+    button.innerText=element;
+    userAnswers.appendChild(button);
+    button.addEventListener("click", displaynextQuestion);
+    });
 }
-var choices = {choiceA, choiceB, choiceC, choiceD};
 
-function checkAnswer(answer){
-    if(allquestions[runningquestion].answer === allquestions[runningquestion].choices[answer]) {
-        // answer is correct
-        score++;
-        answerIsCorrect();
-    }else{
-        // answer is wrong
-        timer -= 10;
-        answerIsWrong();
+
+function displaynextQuestion(e){
+    current++;
+    if(current < questions.length){
+        correction(e.target.innerText == nextQuestions.answer);
+        userAnswers.innerHTML="";
+        if(current < questions.length){    
+            nextQuestions= questions[current];
+            currentQuestion(nextQuestions);
+        }else {
+            current = 0;
+            currentQuestion(nextQuestions);
+        }
+        }else{
+        console.log("endgame");
+        endgame();
+        }
     }
-    if(runningquestion < lastQuestion){
-        runningquestion++;
-        renderQuestion();
-    }else{
-        // end the quiz and show the score
-        clearInterval(timer);
-        //scorerender();
+
+// Time set
+function setTime() {
+    let timeInterval = setInterval(function() {
+    count--;
+    timer.innerText = count;
+    if(count === 0) {
+    clearInterval(timeInterval);
+    sendMessage();
+    }
+    }, 1000);
+  }
+function sendMessage() {
+    timer.innerText = "Time's Up!";
+    endgame();
+}
+
+
+// Response to answers
+function correction(response){
+    if(response){
+        alert.innerText= "Correct";
+        console.log("Correct");
+    }else {
+        alert.innerText="Incorrect";
+        count = count -15;
+        timer.innerHTML = count;
+        console.log("Incorrect");
     }
 }
 
-function answerIsCorrect(){
-    document.getElementById(runningquestion);
-}
-function answerIsWrong(){
-    document.getElementById(runningquestion);
-}
-
-var time = 60
-function startQuiz() {
-    document.getElementById("header").style.visibility="hidden";
-    renderQuestion();
-    checkAnswer();
-    quiz.style.display = "block";
-var timer = setInterval(countdown, 1000);
-function countdown() {
-    if(time > 0) {
-        time-=1
-        timecontainer.textContent = time;
-    //console.log(time);
-    } else {
-        clearInterval(timer);
-    }
+// Score board
+function scoreBoard(a, b) {
+    var userData = { inits: a, userScore: b };
+    allScores.push(userData);
+    localStorage.setItem("userScores", JSON.stringify(allScores));
+    location.href = "score.html";
 }
 
-}
-start.addEventListener("click", startQuiz);
+// End of game
+ function endgame (){
+    btnStart.classList.add("d-none");
+    myScore.innerText = count;
+    addscore.classList.remove("d-none");
+    timecounter.classList.add("d-none");
+    quizQuestions.classList.add("d-none");
+ }
